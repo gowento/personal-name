@@ -9,3 +9,4 @@ npm-debug.log
 .eslintcache
 .env
 .nyc_output
+TODO.md

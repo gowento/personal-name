@@ -17,9 +17,9 @@ npm i personal-name
 ## Usage
 
 ```js
-import personalName from "personal-name"
+import { format } from 'personal-name';
 
-personalName() // true
+format({ firstName: 'tim', lastName: 'berners-lee' }) // Tim Berners-Lee
 ```
 
 ## License
