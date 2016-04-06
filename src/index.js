@@ -2,9 +2,11 @@ import _ from 'lodash';
 
 _.templateSettings.interpolate = /\[([\s\S]+?)\]/g;
 
-function formatName(name) {
-  return _(name)
-    .replace(/[a-zA-Z]+/g, _.capitalize)
+function formatName(name = '') {
+  const lowered = name.toLowerCase();
+  return _(lowered)
+    .words()
+    .reduce((acc, word) => _.replace(acc, word, _.capitalize), lowered)
     .replace(/\s+/g, ' ')
     .trim();
 }

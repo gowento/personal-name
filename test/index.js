@@ -20,6 +20,11 @@ test('format returns proper case', t => {
   t.is(format({ firstName: 'tim', lastName: 'berners-lee' }), 'Tim Berners-Lee');
 });
 
+test('format handles accents', t => {
+  t.is(format({ firstName: 'François', lastName: 'Hollande' }), 'François Hollande');
+  t.is(format({ firstName: 'andrée', lastName: 'chedid' }), 'Andrée Chedid');
+});
+
 test('format trims result', t => {
   t.is(format({ firstName: '  JOHN  ', lastName: '  DOE  ' }), 'John Doe');
   t.is(format({ firstName: '  JOHN  ' }, '[lastName], [firstName]'), 'John');
