@@ -12,7 +12,7 @@ test('format accepts custom tokens', t => {
     lastName: 'Doe',
   };
   t.is(format(person, '[lastName], [firstName]'), 'Doe, John');
-  // t.is(format(person, '[title] [firstName] [lastName]'), 'Mr. John Doe');
+  t.is(format(person, '[title] [firstName] [lastName]'), 'Mr. John Doe');
 });
 
 test('format returns proper case', t => {
@@ -28,4 +28,10 @@ test('format handles accents', t => {
 test('format trims result', t => {
   t.is(format({ firstName: '  JOHN  ', lastName: '  DOE  ' }), 'John Doe');
   t.is(format({ firstName: '  JOHN  ' }, '[lastName], [firstName]'), 'John');
+});
+
+test('format handles title token', t => {
+  t.is(format({ gender: 'male', lastName: 'doe' }, '[title] [firstName] [lastName]'), 'Mr. Doe');
+  t.is(format({ gender: 'female', firstName: 'jane', lastName: 'doe' }, '[title] [firstName] [lastName]'), 'Ms. Jane Doe');
+  t.is(format({ lastName: 'doe' }, '[title] [firstName] [lastName]'), 'Doe');
 });
