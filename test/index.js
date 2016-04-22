@@ -7,12 +7,11 @@ test('format returns a personal name using defaults', t => {
 
 test('format accepts custom tokens', t => {
   const person = {
-    gender: 'male',
     firstName: 'John',
     lastName: 'Doe',
   };
-  t.is(format(person, '[lastName], [firstName]'), 'Doe, John');
-  t.is(format(person, '[title] [firstName] [lastName]'), 'Mr. John Doe');
+  t.is(format(person, { tokens: '[lastName], [firstName]' }), 'Doe, John');
+  t.is(format(person, { tokens: '[lastName]' }), 'Doe');
 });
 
 test('format returns proper case', t => {
@@ -27,11 +26,76 @@ test('format handles accents', t => {
 
 test('format trims result', t => {
   t.is(format({ firstName: '  JOHN  ', lastName: '  DOE  ' }), 'John Doe');
-  t.is(format({ firstName: '  JOHN  ' }, '[lastName], [firstName]'), 'John');
+  t.is(format({ firstName: '  JOHN  ' }, { tokens: '[lastName], [firstName]' }), 'John');
 });
 
 test('format handles title token', t => {
-  t.is(format({ gender: 'male', lastName: 'doe' }, '[title] [firstName] [lastName]'), 'Mr. Doe');
-  t.is(format({ gender: 'female', firstName: 'jane', lastName: 'doe' }, '[title] [firstName] [lastName]'), 'Ms. Jane Doe');
-  t.is(format({ lastName: 'doe' }, '[title] [firstName] [lastName]'), 'Doe');
+  t.is(format(
+    { gender: 'male', lastName: 'doe' },
+    { tokens: '[title] [firstName] [lastName]' }
+  ), 'Mr. Doe');
+  t.is(format(
+    { gender: 'female', firstName: 'jane', lastName: 'doe' },
+    { tokens: '[title] [firstName] [lastName]' }
+  ), 'Ms. Jane Doe');
+  t.is(format(
+    { lastName: 'doe' },
+    { tokens: '[title] [firstName] [lastName]' }
+  ), 'Doe');
+});
+
+test('format handles France country specific rules', t => {
+  t.is(format(
+    { gender: 'male', firstName: 'julien', lastName: 'ravel' },
+    { country: 'FR', tokens: '[title] [firstName] [lastName]' }
+  ), 'M. Julien Ravel');
+  t.is(format(
+    { gender: 'female', firstName: 'marie', lastName: 'duval' },
+    { country: 'FR', tokens: '[title] [firstName] [lastName]' }
+  ), 'Mme Marie Duval');
+
+  t.is(format(
+    { firstName: 'Honoré', lastName: 'De balzac' },
+    { country: 'FR' }
+  ), 'Honoré de Balzac');
+  t.is(format(
+    { lastName: 'De balzac' },
+    { country: 'FR' }
+  ), 'Balzac');
+
+  t.is(format(
+    { firstName: ' jean ', lastName: 'DE LA FONTAINE' },
+    { country: 'FR' }
+  ), 'Jean de La Fontaine');
+  t.is(format(
+    { lastName: 'de la Fontaine' },
+    { country: 'FR' }
+  ), 'La Fontaine');
+
+  t.is(format(
+    { firstName: 'joachim ', lastName: ' du bellay ' },
+    { country: 'FR' }
+  ), 'Joachim Du Bellay');
+  t.is(format(
+    { lastName: 'du bellay' },
+    { country: 'FR' }
+  ), 'Du Bellay');
+
+  t.is(format(
+    { firstName: 'GÉRARD', lastName: 'd\'aboville' },
+    { country: 'FR' }
+  ), 'Gérard d\'Aboville');
+  t.is(format(
+    { lastName: 'd\'aboville' },
+    { country: 'FR' }
+  ), 'd\'Aboville');
+
+  t.is(format(
+    { firstName: 'guy ', lastName: 'des cars' },
+    { country: 'FR' }
+  ), 'Guy des Cars');
+  t.is(format(
+    { lastName: 'DES CARS' },
+    { country: 'FR' }
+  ), 'des Cars'); // TODO should be "Des Cars"
 });
