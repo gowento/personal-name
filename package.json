@@ -60,7 +60,7 @@
     "eslint-plugin-lodash": "1.7.0",
     "nyc": "6.4.0",
     "rimraf": "2.5.2",
-    "watch": "0.17.1"
+    "watch": "0.18.0"
   },
   "dependencies": {
     "lodash": "4.11.1"
