@@ -63,6 +63,6 @@
     "watch": "0.17.1"
   },
   "dependencies": {
-    "lodash": "4.11.1"
+    "lodash": "4.11.2"
   }
 }
