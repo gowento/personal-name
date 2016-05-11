@@ -30,6 +30,10 @@ test('format trims result', t => {
   t.is(format({ firstName: '  JOHN  ' }, { tokens: '[lastName], [firstName]' }), 'John');
 });
 
+test('format trims Unicode separators', t => {
+  t.is(format({ firstName: '\xA0\xA0Arnold\xA0\xA0', lastName: '\xA0Unbreakable\xA0' }), 'Arnold\x20Unbreakable');
+});
+
 test('format handles title token', t => {
   t.is(format(
     { gender: 'male', lastName: 'doe' },
