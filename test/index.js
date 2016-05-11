@@ -31,7 +31,7 @@ test('format trims result', t => {
 });
 
 test('format trims Unicode separators', t => {
-  t.is(format({ firstName: '    Arnold    ', lastName: 'Unbreakable ' }), 'Arnold Unbreakable');
+  t.is(format({ firstName: '\xA0\xA0Arnold\xA0\xA0', lastName: '\xA0Unbreakable\xA0' }), 'Arnold\x20Unbreakable');
 });
 
 test('format handles title token', t => {
