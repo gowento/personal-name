@@ -3,6 +3,7 @@ import XRegExp from 'xregexp';
 
 _.templateSettings.interpolate = /\[([\s\S]+?)\]/g;
 const nonUnicodeWord = new XRegExp('^[\\PL]+|[\\PL]+$', 'g');
+const unicodeSeparators = new XRegExp('\\p{Zs}+', 'g');
 
 const countries = {
   FR: {
@@ -62,7 +63,7 @@ export function format(person = {}, opts = {}) {
       : null;
 
     return string
-      .replace(/\s+/g, ' ') // Replace multiple spaces with a single space
+      .replace(unicodeSeparators, ' ') // Replace multiple separators with a single ASCII space
       .replace(nonUnicodeWord, '') // Remove any leading/trailing not word characters
       .replace(toTrimLeftRegexp, ''); // Remove unwanted leading words
       // .replace(/^./, _.upperFirst); // Capitalize first letter again
