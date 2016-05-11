@@ -1,6 +1,8 @@
 import _ from 'lodash';
+import XRegExp from 'xregexp';
 
 _.templateSettings.interpolate = /\[([\s\S]+?)\]/g;
+const nonUnicodeWord = new XRegExp('^[\\PL]+|[\\PL]+$', 'g');
 
 const countries = {
   FR: {
@@ -61,7 +63,7 @@ export function format(person = {}, opts = {}) {
 
     return string
       .replace(/\s+/g, ' ') // Replace multiple spaces with a single space
-      .replace(/^[\W\d_]+|[\W\d_]+$/g, '') // Remove any leading/trailing not word characters
+      .replace(nonUnicodeWord, '') // Remove any leading/trailing not word characters
       .replace(toTrimLeftRegexp, ''); // Remove unwanted leading words
       // .replace(/^./, _.upperFirst); // Capitalize first letter again
   }
