@@ -1,6 +1,6 @@
 {
   "name": "personal-name",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Parse and format personal names (fistname, lastname, titles, …)",
   "contributors": [
     "Loris Guignard <loris.guignard@gmail.com>"
