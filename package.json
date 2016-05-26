@@ -44,7 +44,7 @@
   "license": "MIT",
   "homepage": "https://github.com/gowento/personal-name#readme",
   "devDependencies": {
-    "ava": "0.15.0",
+    "ava": "0.15.1",
     "babel-cli": "6.9.0",
     "babel-core": "6.9.0",
     "babel-eslint": "6.0.4",
