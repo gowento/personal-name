@@ -27,7 +27,10 @@ test('format handles accents', t => {
 
 test('format handles dash', t => {
   t.is(format({ firstName: 'MARIE-HELENE', lastName: 'BLANC' }), 'Marie-Helene Blanc');
-  t.is(format({ firstName: 'alexandre auguste', lastName: 'ledru-rollin' }), 'Alexandre Auguste Ledru-Rollin');
+  t.is(
+    format({ firstName: 'alexandre auguste', lastName: 'ledru-rollin' }),
+    'Alexandre Auguste Ledru-Rollin'
+  );
 });
 
 test('format trims result', t => {
