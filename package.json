@@ -57,7 +57,7 @@
     "eslint-plugin-import": "1.8.1",
     "eslint-plugin-lodash": "1.9.2",
     "nyc": "6.6.1",
-    "rimraf": "2.5.2",
+    "rimraf": "2.5.3",
     "watch": "0.18.0"
   },
   "dependencies": {
