@@ -46,8 +46,8 @@ export function format(person = {}, opts = {}) {
       : _.capitalize(word);
   }
 
-  function formatName(name = '') {
-    const lowered = name.toLowerCase();
+  function formatName(name) {
+    const lowered = (name || '').toLowerCase();
     return _(lowered)
       .words()
       .reduce((acc, word) => _.replace(acc, word, capitalize), lowered);

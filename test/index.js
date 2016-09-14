@@ -33,6 +33,10 @@ test('format handles dash', t => {
   );
 });
 
+test('format handles null values', t => {
+  t.is(format({ firstName: null, lastName: 'foobar' }), 'Foobar');
+});
+
 test('format trims result', t => {
   t.is(format({ firstName: '  JOHN  ', lastName: '  DOE  ' }), 'John Doe');
   t.is(format({ firstName: '  JOHN  ' }, { tokens: '[lastName], [firstName]' }), 'John');
