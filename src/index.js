@@ -1,7 +1,14 @@
-import _ from 'lodash';
 import XRegExp from 'xregexp';
+import templateSettings from 'lodash/templateSettings';
+import template from 'lodash/template';
+import defaults from 'lodash/defaults';
+import includes from 'lodash/includes';
+import capitalize from 'lodash/capitalize';
+import replace from 'lodash/replace';
+import words from 'lodash/words';
+import reduce from 'lodash/reduce';
 
-_.templateSettings.interpolate = /\[([\s\S]+?)\]/g;
+templateSettings.interpolate = /\[([\s\S]+?)]/g;
 const nonUnicodeWord = new XRegExp('^[\\PL]+|[\\PL]+$', 'g');
 const unicodeSeparators = new XRegExp('\\p{Zs}+', 'g');
 
@@ -30,7 +37,7 @@ const countries = {
 };
 
 export function format(person = {}, opts = {}) {
-  const { country, tokens } = _.defaults(opts, {
+  const { country, tokens } = defaults(opts, {
     country: 'US',
     tokens: '[firstName] [lastName]',
   });
@@ -40,17 +47,19 @@ export function format(person = {}, opts = {}) {
   const toLowerCase = countrySettings.toLowerCase || [];
   const toTrimLeft = countrySettings.toTrimLeft;
 
-  function capitalize(word) {
-    return _.includes(toLowerCase, word)
+  function capitalizeReducer(word) {
+    return includes(toLowerCase, word)
       ? word
-      : _.capitalize(word);
+      : capitalize(word);
   }
 
   function formatName(name) {
     const lowered = (name || '').toLowerCase();
-    return _(lowered)
-      .words()
-      .reduce((acc, word) => _.replace(acc, word, capitalize), lowered);
+    return reduce(
+      words(lowered),
+      (acc, word) => replace(acc, word, capitalizeReducer),
+      lowered
+    );
   }
 
   function formatTitle(gender = '') {
@@ -66,7 +75,7 @@ export function format(person = {}, opts = {}) {
       .replace(unicodeSeparators, ' ') // Replace multiple separators with a single ASCII space
       .replace(nonUnicodeWord, '') // Remove any leading/trailing not word characters
       .replace(toTrimLeftRegexp, ''); // Remove unwanted leading words
-      // .replace(/^./, _.upperFirst); // Capitalize first letter again
+      // .replace(/^./, upperFirst); // Capitalize first letter again
   }
 
   const data = {
@@ -75,6 +84,6 @@ export function format(person = {}, opts = {}) {
     title: formatTitle(person.gender, country),
   };
 
-  const result = _.template(tokens)(data);
+  const result = template(tokens)(data);
   return clean(result);
 }
