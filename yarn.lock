@@ -1757,9 +1757,9 @@ eslint-config-airbnb@17.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
-eslint-config-gowento@5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-gowento/-/eslint-config-gowento-5.2.0.tgz#8ff96c962149f79b57880ef747fe036e63367bfb"
+eslint-config-gowento@5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-gowento/-/eslint-config-gowento-5.3.0.tgz#baa11dcc15c0025a438cbdd28adfff77042db2ff"
   dependencies:
     babel-eslint "9.0.0"
     eslint-config-airbnb "17.1.0"
