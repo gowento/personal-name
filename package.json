@@ -23,7 +23,7 @@
     "release": "np",
     "test": "NODE_ENV=test ava"
   },
-  "homepage": "https://github.com/gowento/personal-name#readme",
+  "homepage": "https://github.com/gowento/personal-name",
   "repository": {
     "type": "git",
     "url": "git@github.com:gowento/personal-name.git"
