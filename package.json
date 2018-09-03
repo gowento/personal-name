@@ -15,10 +15,10 @@
     "build": "babel ./src/index.js --out-file ./dist/cjs/index.js",
     "coverage": "nyc npm test && nyc report --reporter=html",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "depcheck": "dependency-check ./package.json --no-default-entry ./src/index.js",
+    "depcheck": "dependency-check ./package.json --no-default-entry --entry ./src/index.js",
     "lint": "eslint ./src ./test",
     "postcoveralls": "rimraf ./coverage",
-    "prebuild": "npm run lint && npm run depcheck && rimraf ./dist && mkdirp ./dist/cjs",
+    "prebuild": "npm run lint && rimraf ./dist && mkdirp ./dist/cjs && npm run depcheck",
     "prepare": "npm run build",
     "release": "np",
     "test": "NODE_ENV=test ava"
