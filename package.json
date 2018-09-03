@@ -2,7 +2,7 @@
   "name": "personal-name",
   "version": "2.0.1",
   "description": "Parse and format personal names (fistname, lastname, titles, …)",
-  "author": "Gowento <github@gowento.com>",
+  "author": "Gowento <hackers@gowento.com>",
   "contributors": [
     "Loris Guignard <loris.guignard@gmail.com>",
     "Eric Redon <eric.redon@coox.org>"
