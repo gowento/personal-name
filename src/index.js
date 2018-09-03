@@ -1,14 +1,7 @@
+import _ from 'lodash';
 import XRegExp from 'xregexp';
-import templateSettings from 'lodash/templateSettings';
-import template from 'lodash/template';
-import defaults from 'lodash/defaults';
-import includes from 'lodash/includes';
-import capitalize from 'lodash/capitalize';
-import replace from 'lodash/replace';
-import words from 'lodash/words';
-import reduce from 'lodash/reduce';
 
-templateSettings.interpolate = /\[([\s\S]+?)]/g;
+_.templateSettings.interpolate = /\[([\s\S]+?)]/g;
 const nonUnicodeWord = new XRegExp('^[\\PL]+|[\\PL]+$', 'g');
 const unicodeSeparators = new XRegExp('\\p{Zs}+', 'g');
 
@@ -37,7 +30,7 @@ const countries = {
 };
 
 export function format(person = {}, opts = {}) {
-  const { country, tokens } = defaults(opts, {
+  const { country, tokens } = _.defaults(opts, {
     country: 'US',
     tokens: '[firstName] [lastName]',
   });
@@ -45,19 +38,17 @@ export function format(person = {}, opts = {}) {
   const countrySettings = countries[country] || {};
   const titles = countrySettings.titles || {};
   const toLowerCase = countrySettings.toLowerCase || [];
-  const toTrimLeft = countrySettings.toTrimLeft;
+  const { toTrimLeft } = countrySettings;
 
   function capitalizeReducer(word) {
-    return includes(toLowerCase, word)
-      ? word
-      : capitalize(word);
+    return _.includes(toLowerCase, word) ? word : _.capitalize(word);
   }
 
   function formatName(name) {
     const lowered = (name || '').toLowerCase();
-    return reduce(
-      words(lowered),
-      (acc, word) => replace(acc, word, capitalizeReducer),
+    return _.reduce(
+      _.words(lowered),
+      (acc, word) => _.replace(acc, word, capitalizeReducer),
       lowered
     );
   }
@@ -75,7 +66,7 @@ export function format(person = {}, opts = {}) {
       .replace(unicodeSeparators, ' ') // Replace multiple separators with a single ASCII space
       .replace(nonUnicodeWord, '') // Remove any leading/trailing not word characters
       .replace(toTrimLeftRegexp, ''); // Remove unwanted leading words
-      // .replace(/^./, upperFirst); // Capitalize first letter again
+    // .replace(/^./, upperFirst); // Capitalize first letter again
   }
 
   const data = {
@@ -84,6 +75,8 @@ export function format(person = {}, opts = {}) {
     title: formatTitle(person.gender, country),
   };
 
-  const result = template(tokens)(data);
+  const result = _.template(tokens)(data);
   return clean(result);
 }
+
+export default format;
