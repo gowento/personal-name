@@ -1,6 +1,6 @@
 {
   "name": "personal-name",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Parse and format personal names (fistname, lastname, titles, …)",
   "author": "Gowento <github@gowento.com>",
   "contributors": [
