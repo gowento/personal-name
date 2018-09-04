@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import XRegExp from 'xregexp';
 
-_.templateSettings.interpolate = /\[([\s\S]+?)]/g;
 const nonUnicodeWord = new XRegExp('^[\\PL]+|[\\PL]+$', 'g');
 const unicodeSeparators = new XRegExp('\\p{Zs}+', 'g');
 
@@ -75,7 +74,7 @@ export function format(person = {}, opts = {}) {
     title: formatTitle(person.gender, country),
   };
 
-  const result = _.template(tokens)(data);
+  const result = _.template(tokens, { interpolate: /\[([\s\S]+?)]/g })(data);
   return clean(result);
 }
 
