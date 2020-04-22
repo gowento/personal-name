@@ -1,11 +1,11 @@
 import test from 'ava';
 import { format } from '../src';
 
-test('format returns a personal name using defaults', t => {
+test('format returns a personal name using defaults', (t) => {
   t.is(format({ firstName: 'John', lastName: 'Doe' }), 'John Doe');
 });
 
-test('format accepts custom tokens', t => {
+test('format accepts custom tokens', (t) => {
   const person = {
     firstName: 'John',
     lastName: 'Doe',
@@ -14,7 +14,7 @@ test('format accepts custom tokens', t => {
   t.is(format(person, { tokens: '[lastName]' }), 'Doe');
 });
 
-test('format returns proper case', t => {
+test('format returns proper case', (t) => {
   t.is(format({ firstName: 'joHN', lastName: 'DOe' }), 'John Doe');
   t.is(
     format({ firstName: 'tim', lastName: 'berners-lee' }),
@@ -22,7 +22,7 @@ test('format returns proper case', t => {
   );
 });
 
-test('format handles accents', t => {
+test('format handles accents', (t) => {
   t.is(
     format({ firstName: 'François', lastName: 'Hollande' }),
     'François Hollande'
@@ -31,7 +31,7 @@ test('format handles accents', t => {
   t.is(format({ firstName: 'Éric', lastName: 'Redon' }), 'Éric Redon');
 });
 
-test('format handles dash', t => {
+test('format handles dash', (t) => {
   t.is(
     format({ firstName: 'MARIE-HELENE', lastName: 'BLANC' }),
     'Marie-Helene Blanc'
@@ -42,11 +42,11 @@ test('format handles dash', t => {
   );
 });
 
-test('format handles null values', t => {
+test('format handles null values', (t) => {
   t.is(format({ firstName: null, lastName: 'foobar' }), 'Foobar');
 });
 
-test('format trims result', t => {
+test('format trims result', (t) => {
   t.is(format({ firstName: '  JOHN  ', lastName: '  DOE  ' }), 'John Doe');
   t.is(
     format({ firstName: '  JOHN  ' }, { tokens: '[lastName], [firstName]' }),
@@ -54,7 +54,7 @@ test('format trims result', t => {
   );
 });
 
-test('format trims Unicode separators', t => {
+test('format trims Unicode separators', (t) => {
   t.is(
     format({
       firstName: '\xA0\xA0Arnold\xA0\xA0',
@@ -64,7 +64,7 @@ test('format trims Unicode separators', t => {
   );
 });
 
-test('format handles title token', t => {
+test('format handles title token', (t) => {
   t.is(
     format(
       { gender: 'male', lastName: 'doe' },
@@ -85,7 +85,7 @@ test('format handles title token', t => {
   );
 });
 
-test('format handles France country specific rules', t => {
+test('format handles France country specific rules', (t) => {
   t.is(
     format(
       { gender: 'male', firstName: 'julien', lastName: 'ravel' },
