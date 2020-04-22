@@ -13,14 +13,14 @@
   "main": "dist/cjs/index.js",
   "scripts": {
     "build": "babel ./src/index.js --out-file ./dist/cjs/index.js",
-    "coverage": "nyc npm test && nyc report --reporter=html",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc yarn test && nyc report --reporter=html",
+    "coveralls": "nyc yarn test && nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint ./src ./test",
     "postcoveralls": "rimraf ./coverage",
-    "prebuild": "npm run lint && rimraf ./dist && mkdirp ./dist/cjs",
-    "prepare": "npm run build",
+    "prebuild": "yarn run lint && rimraf ./dist && mkdirp ./dist/cjs",
+    "prepare": "yarn run build",
     "release": "np",
-    "test": "NODE_ENV=test ava"
+    "test": "ava"
   },
   "homepage": "https://github.com/gowento/personal-name",
   "repository": {
