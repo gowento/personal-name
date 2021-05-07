@@ -43,7 +43,7 @@
     "rimraf": "3.0.2"
   },
   "dependencies": {
-    "lodash": "4.17.15",
+    "lodash": "4.17.21",
     "xregexp": "4.3.0"
   }
 }
