@@ -3,6 +3,7 @@ import XRegExp from 'xregexp';
 
 const nonUnicodeWord = new XRegExp('^[\\PL]+|[\\PL]+$', 'g');
 const unicodeSeparators = new XRegExp('\\p{Zs}+', 'g');
+const htmlTags = new XRegExp('[<>]', 'g');
 
 const countries = {
   FR: {
@@ -65,12 +66,13 @@ export function format(person = {}, opts = {}) {
       .replace(unicodeSeparators, ' ') // Replace multiple separators with a single ASCII space
       .replace(nonUnicodeWord, '') // Remove any leading/trailing not word characters
       .replace(toTrimLeftRegexp, ''); // Remove unwanted leading words
-    // .replace(/^./, upperFirst); // Capitalize first letter again
   }
 
+  const removeHtmlTags = (string) => _.replace(string, htmlTags, '');
+
   const data = {
-    firstName: formatName(person.firstName, country),
-    lastName: formatName(person.lastName, country),
+    firstName: formatName(removeHtmlTags(person.firstName), country),
+    lastName: formatName(removeHtmlTags(person.lastName), country),
     title: formatTitle(person.gender, country),
   };
 

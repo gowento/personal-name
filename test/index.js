@@ -85,6 +85,10 @@ test('format handles title token', (t) => {
   );
 });
 
+test('format remove html characters inside words', (t) => {
+  t.is(format({ firstName: 'joh<n>' }), 'John');
+});
+
 test('format handles France country specific rules', (t) => {
   t.is(
     format(
