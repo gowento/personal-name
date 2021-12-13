@@ -12,7 +12,6 @@ const countries = {
       female: 'Mme',
     },
     toLowerCase: ['de', 'd', 'des'],
-    toTrimLeft: ['de'],
   },
   US: {
     titles: {
@@ -38,7 +37,6 @@ export function format(person = {}, opts = {}) {
   const countrySettings = countries[country] || {};
   const titles = countrySettings.titles || {};
   const toLowerCase = countrySettings.toLowerCase || [];
-  const { toTrimLeft } = countrySettings;
 
   function capitalizeReducer(word) {
     return _.includes(toLowerCase, word) ? word : _.capitalize(word);
@@ -58,14 +56,9 @@ export function format(person = {}, opts = {}) {
   }
 
   function clean(string) {
-    const toTrimLeftRegexp = toTrimLeft
-      ? new RegExp(`^(${toTrimLeft.join('|')}) `)
-      : null;
-
     return string
       .replace(unicodeSeparators, ' ') // Replace multiple separators with a single ASCII space
-      .replace(nonUnicodeWord, '') // Remove any leading/trailing not word characters
-      .replace(toTrimLeftRegexp, ''); // Remove unwanted leading words
+      .replace(nonUnicodeWord, ''); // Remove any leading/trailing not word characters
   }
 
   const removeHtmlTags = (string) => _.replace(string, htmlTags, '');

@@ -109,7 +109,7 @@ test('format handles France country specific rules', (t) => {
     format({ firstName: 'Honoré', lastName: 'De balzac' }, { country: 'FR' }),
     'Honoré de Balzac'
   );
-  t.is(format({ lastName: 'De balzac' }, { country: 'FR' }), 'Balzac');
+  t.is(format({ lastName: 'De balzac' }, { country: 'FR' }), 'de Balzac');
 
   t.is(
     format(
@@ -120,7 +120,7 @@ test('format handles France country specific rules', (t) => {
   );
   t.is(
     format({ lastName: 'de la Fontaine' }, { country: 'FR' }),
-    'La Fontaine'
+    'de La Fontaine'
   );
 
   t.is(
